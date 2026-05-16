@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+/* LINE Seed KR Fonts */
+@font-face {
+  font-family: "LINE Seed KR";
+  src: url("/fonts/LINESeedKR-Th.woff2") format("woff2"),
+    url("/fonts/LINESeedKR-Th.woff") format("woff"),
+    url("/fonts/LINESeedKR-Th.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed KR";
+  src: url("/fonts/LINESeedKR-Rg.woff2") format("woff2"),
+    url("/fonts/LINESeedKR-Rg.woff") format("woff"),
+    url("/fonts/LINESeedKR-Rg.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed KR";
+  src: url("/fonts/LINESeedKR-Bd.woff2") format("woff2"),
+    url("/fonts/LINESeedKR-Bd.woff") format("woff"),
+    url("/fonts/LINESeedKR-Bd.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Light Theme (Default) */
+:root {
+  --background: #ffffff;
+  --foreground: #1f2328;
+  --card: #f6f8fa;
+  --card-foreground: #1f2328;
+  --popover: #ffffff;
+  --popover-foreground: #f6f8fa;
+  --border: #d0dae0;
+  --muted: #8b949d;
+  --muted-foreground: #59636e;
+  --blue-muted: #738cae;
+  --primary: #0969da;
+  --primary-foreground: #ffffff;
+  --accent: #f6f8fa;
+  --active: #c1408d;
+  --danger: #d1242f;
+  --success: #1f883d;
+  --attention: #fff8c5;
+  --disable: #818b98;
+  --reverse: #f9fafb;
+  --highlight-primary: #0757ba;
+  --highlight-secondary: #f8f7f2;
+  --highlight-card: #f8f7f2;
+  --highlight-accent: #9c27b0;
+  --highlight-danger: #cf222e;
+  --highlight-success: #1a7f37;
+  --highlight-attention: #f1e05a;
+  --button-primary: #1f2735;
+  --button-primary-text: #f9fafb;
+  --button-submit: #ed3f40;
+}
+
+/* Dark Theme */
+.dark {
+  --background: #202830;
+  --foreground: #d1d7e0;
+  --card: #2a313c;
+  --card-foreground: #d1d7e0;
+  --popover: #202830;
+  --popover-foreground: #2a313c;
+  --border: #3d444d;
+  --muted: #8b949d;
+  --muted-foreground: #9198a1;
+  --blue-muted: #738cae;
+  --primary: #478be6;
+  --primary-foreground: #ffffff;
+  --accent: #ffffff;
+  --active: #c86299;
+  --danger: #d1242f;
+  --success: #347d38;
+  --attention: #fff8c5;
+  --disable: #656c76;
+  --reverse: #232333;
+  --highlight-primary: #3177c6;
+  --highlight-secondary: #22221c;
+  --highlight-card: #10100d;
+  --highlight-accent: #a97bff;
+  --highlight-danger: #cf222e;
+  --highlight-success: #1a7f37;
+  --highlight-attention: #f1e05a;
+  --button-primary: #10100d;
+  --button-primary-text: #f9fafb;
+  --button-submit: #ed3f40;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-blue-muted: var(--blue-muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-active: var(--active);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-attention: var(--attention);
+  --color-disable: var(--disable);
+  --color-reverse: var(--reverse);
+
+  /* Highlight Colors */
+  --color-highlight-primary: var(--highlight-primary);
+  --color-highlight-secondary: var(--highlight-secondary);
+  --color-highlight-card: var(--highlight-card);
+  --color-highlight-accent: var(--highlight-accent);
+  --color-highlight-danger: var(--highlight-danger);
+  --color-highlight-success: var(--highlight-success);
+  --color-highlight-attention: var(--highlight-attention);
+
+  /* Button Colors */
+  --color-button-primary: var(--button-primary);
+  --color-button-primary-text: var(--button-primary-text);
+  --color-button-submit: var(--button-submit);
+
+  --font-family: "LINE Seed KR", -apple-system, Arial, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-family);
+  font-weight: 400;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Font Classes */
+.font-lineseed {
+  font-family: "LINE Seed KR", -apple-system, Arial, sans-serif;
+}
+
+.font-lineseed-thin {
+  font-family: "LINE Seed KR", -apple-system, Arial, sans-serif;
+  font-weight: 100;
+}
+
+.font-lineseed-normal {
+  font-family: "LINE Seed KR", -apple-system, Arial, sans-serif;
+  font-weight: 400;
+}
+
+.font-lineseed-bold {
+  font-family: "LINE Seed KR", -apple-system, Arial, sans-serif;
+  font-weight: 700;
+}
+
+/* Dark mode transition */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
