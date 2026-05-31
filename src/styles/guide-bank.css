@@ -1,0 +1,1422 @@
+/* build-vite CB/TB design tokens — scoped to .guide-bank-root */
+
+.guide-bank-root {
+  --background: oklch(0.985 0.002 247.8);
+  --foreground: #18181b;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.358 0.012 250.4);
+  --primary: oklch(0.564 0.198 255.45);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.975 0.004 95);
+  --secondary-foreground: oklch(0.358 0.012 250.4);
+  --secondary-emphasis: oklch(0.92 0.01 95);
+  --muted: oklch(0.95 0.01 250.4);
+  --muted-foreground: oklch(0.62 0.02 250.4);
+  --muted-soft: #f3f3f3;
+  --reverse-primary: oklch(0.32 0.04 255);
+  --reverse-primary-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.558 0.22 25.4);
+  --border: oklch(0.9 0.01 250.4);
+  --success: oklch(0.52 0.16 145);
+  --site-mobile-px: 1rem;
+  --site-px: 1.5rem;
+  --radius: 0.5rem;
+  --radius-md: 0.375rem;
+
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "LINE Seed KR", -apple-system, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Guide page layout ── */
+
+.guide-page {
+  --guide-page-max-width: 72rem;
+  --guide-page-padding-x: 1.5rem;
+  min-height: 100dvh;
+  background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 40%, #f8f7f2 100%);
+}
+
+@media (min-width: 960px) {
+  .guide-page {
+    --guide-page-padding-x: 2rem;
+  }
+}
+
+.guide-page-header {
+  border-bottom: 1px solid rgba(208, 218, 224, 0.6);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.guide-page-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: var(--guide-page-max-width);
+  margin: 0 auto;
+  padding: 1.25rem var(--guide-page-padding-x);
+}
+
+.guide-page-back {
+  font-size: 0.8125rem;
+  color: oklch(0.62 0.02 250.4);
+  text-decoration: none;
+}
+
+.guide-page-back:hover {
+  color: oklch(0.564 0.198 255.45);
+}
+
+.guide-page-title {
+  margin-top: 0.35rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.guide-page-subtitle {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: oklch(0.62 0.02 250.4);
+}
+
+.guide-page-external {
+  align-self: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: oklch(0.564 0.198 255.45);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.guide-layout {
+  display: grid;
+  gap: 1.5rem;
+  max-width: var(--guide-page-max-width);
+  margin: 0 auto;
+  padding: 1.5rem var(--guide-page-padding-x);
+}
+
+@media (min-width: 960px) {
+  .guide-layout {
+    grid-template-columns: minmax(0, 420px) 1fr;
+    align-items: start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.guide-mock-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.guide-mock-frame {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  min-height: 560px;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(31, 35, 40, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-mock-frame > .guide-cb-root {
+  flex: 1;
+  min-height: 0;
+}
+
+.guide-mock-frame > .guide-tb-root {
+  flex: 1;
+  min-height: 0;
+}
+
+.guide-sidebar {
+  position: sticky;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.guide-scenario-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.guide-scenario-tab {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.guide-scenario-tab.is-active {
+  background: oklch(0.564 0.198 255.45);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ── Step panel & controls ── */
+
+.guide-step-panel {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(208, 218, 224, 0.6);
+  box-shadow: 0 4px 24px rgba(31, 35, 40, 0.06);
+}
+
+.guide-step-panel-kicker {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(0.564 0.198 255.45);
+}
+
+.guide-step-panel-title {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.guide-step-panel-caption {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: oklch(0.62 0.02 250.4);
+}
+
+.guide-step-panel-caption-list {
+  margin-bottom: 0;
+  padding-left: 1.125rem;
+  list-style: disc;
+}
+
+.guide-step-panel-caption-list li + li {
+  margin-top: 0.375rem;
+}
+
+.guide-step-panel-detail {
+  margin-top: 0.875rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(208, 218, 224, 0.8);
+  background: rgba(243, 243, 243, 0.5);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: oklch(0.358 0.012 250.4);
+}
+
+.guide-step-panel-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: inherit;
+}
+
+.guide-step-panel-detail-table th {
+  width: 1%;
+  padding: 0.25rem 0.5rem 0.25rem 0;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.guide-step-panel-detail-table td {
+  padding: 0.25rem 0;
+  vertical-align: top;
+}
+
+.guide-step-panel-detail-table .bank-info-box-note {
+  margin: 0.25rem 0 0;
+}
+
+.guide-controls {
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(208, 218, 224, 0.6);
+}
+
+.guide-controls-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: oklch(0.95 0.01 250.4);
+  overflow: hidden;
+}
+
+.guide-controls-progress-bar {
+  height: 100%;
+  background: oklch(0.564 0.198 255.45);
+  transition: width 0.1s linear;
+}
+
+.guide-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.875rem;
+}
+
+.guide-controls-step {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: oklch(0.62 0.02 250.4);
+}
+
+.guide-controls-buttons {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.guide-controls-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.guide-controls-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.guide-controls-btn--primary {
+  background: oklch(0.564 0.198 255.45);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* ── Overlay ── */
+
+.guide-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.guide-confetti-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.guide-confetti-layer canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.guide-cb-root .bank-receipt-section,
+.guide-cb-root .bank-transfer-receipt {
+  position: relative;
+  z-index: 6;
+}
+
+.guide-tb-root .bank-receipt-section,
+.guide-tb-root .bank-transfer-receipt {
+  position: relative;
+  z-index: 6;
+}
+
+.guide-highlight-target {
+  position: relative;
+  z-index: 2;
+  animation: guide-ring-pulse 1.2s ease-in-out infinite;
+}
+
+/* pulse ring — mock frame·패널·탭 overflow로 잘림 방지 */
+.guide-mock-wrap:has(.guide-highlight-target) {
+  overflow: visible;
+}
+
+.guide-mock-frame:has(.guide-highlight-target) {
+  overflow: visible;
+}
+
+.guide-cb-root .bank-panel:has(.guide-highlight-target),
+.guide-cb-root .bank-panel.guide-highlight-target {
+  overflow: visible;
+}
+
+.guide-cb-root .bank-transfer-tabs:has(.guide-highlight-target) {
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.guide-cb-root .bank-transfer-tab.guide-highlight-target {
+  z-index: 3;
+}
+
+.guide-tb-root .bank-panel:has(.guide-highlight-target),
+.guide-tb-root .bank-panel.guide-highlight-target {
+  overflow: visible;
+}
+
+.guide-tb-root .bank-transfer-tabs:has(.guide-highlight-target) {
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.guide-tb-root .bank-transfer-tab.guide-highlight-target {
+  z-index: 3;
+}
+
+@keyframes guide-ring-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px oklch(0.564 0.198 255.45),
+      0 0 0 8px rgba(9, 105, 218, 0.16);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px oklch(0.564 0.198 255.45),
+      0 0 0 14px rgba(9, 105, 218, 0.08);
+  }
+}
+
+.guide-cb-root .bank-toolbar:has(.guide-highlight-target) {
+  overflow: visible;
+}
+
+.guide-tb-root .bank-toolbar:has(.guide-highlight-target) {
+  overflow: visible;
+}
+
+.guide-click-pulse {
+  position: absolute;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: -0.875rem 0 0 -0.875rem;
+  border-radius: 50%;
+  background: rgba(9, 105, 218, 0.25);
+  animation: guide-click-pulse 0.6s ease-out;
+}
+
+.guide-cursor {
+  position: absolute;
+  margin: -2px 0 0 -2px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  transition: left 0.35s ease, top 0.35s ease;
+  animation: guide-cursor-bob 0.8s ease-in-out infinite;
+}
+
+@keyframes guide-click-pulse {
+  from {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+@keyframes guide-cursor-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+/* ── Bank mock shared ── */
+
+.guide-cb-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.guide-tb-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.guide-cb-root .bank-panel:last-child {
+  flex: 1;
+  border-bottom: none;
+  border-bottom-left-radius: calc(1rem - 1px);
+  border-bottom-right-radius: calc(1rem - 1px);
+}
+
+.guide-tb-root .bank-panel:last-child {
+  flex: 1;
+  border-bottom: none;
+  border-bottom-left-radius: calc(1rem - 1px);
+  border-bottom-right-radius: calc(1rem - 1px);
+}
+
+.guide-cb-root .bank-receipt-section:last-child {
+  flex: 1;
+  border-bottom-left-radius: calc(1rem - 1px);
+  border-bottom-right-radius: calc(1rem - 1px);
+}
+
+.guide-tb-root .bank-receipt-section:last-child {
+  flex: 1;
+  border-bottom-left-radius: calc(1rem - 1px);
+  border-bottom-right-radius: calc(1rem - 1px);
+}
+
+.guide-cb-root .bank-list-section:last-child {
+  flex: 1;
+  border-bottom-left-radius: calc(1rem - 1px);
+  border-bottom-right-radius: calc(1rem - 1px);
+}
+
+.guide-tb-root .bank-list-section:last-child {
+  flex: 1;
+  border-bottom-left-radius: calc(1rem - 1px);
+  border-bottom-right-radius: calc(1rem - 1px);
+}
+
+.bank-header {
+  padding: 1rem var(--site-mobile-px);
+}
+
+.bank-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.bank-header-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.bank-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.bank-avatar--logo {
+  background: transparent;
+  overflow: hidden;
+}
+
+.bank-avatar-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bank-header-name {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.bank-balance-block {
+  text-align: right;
+}
+
+.bank-balance-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.bank-balance-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0.125rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.bank-balance-unit {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+.bank-balance-sublabel {
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.bank-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.bank-stats-item {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.bank-stats-row strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.bank-stats-sep {
+  flex-shrink: 0;
+  color: color-mix(in oklch, var(--muted-foreground) 70%, transparent);
+  user-select: none;
+}
+
+.bank-stats-unit-suffix {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in oklch, var(--muted-foreground) 90%, transparent);
+}
+
+.bank-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem var(--site-mobile-px);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.bank-toolbar-actions {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  gap: 2px;
+  padding: 2px 4px 2px 4px;
+  border-radius: 0.5rem;
+  background: var(--reverse-primary);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.bank-toolbar-action {
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  gap: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--reverse-primary-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: default;
+}
+
+.bank-toolbar-action.is-active {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.bank-toolbar-tabs {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  gap: 2px;
+  padding: 2px 4px 2px 2px;
+  border-radius: 0.5rem;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+
+.bank-toolbar-tabs.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.bank-toolbar-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  border: 1px solid transparent;
+}
+
+.bank-toolbar-tab.is-active {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* 지역화폐 가이드 — 내역 탭 버튼 좌우 여백 축소 */
+.guide-cb-root .bank-toolbar-tabs {
+  padding: 2px 2px 2px 2px;
+  gap: 1px;
+}
+
+.guide-cb-root .bank-toolbar-tab {
+  padding: 0 0.3rem;
+  font-size: 0.8125rem;
+}
+
+/* 시간선물 핑퐁 가이드 — 내역 탭 버튼 좌우 여백 축소 */
+.guide-tb-root .bank-toolbar-tabs {
+  padding: 2px 2px 2px 2px;
+  gap: 1px;
+}
+
+.guide-tb-root .bank-toolbar-tab {
+  padding: 0 0.3rem;
+  font-size: 0.8125rem;
+}
+
+.bank-panel {
+  padding: 1.5rem;
+  background: var(--secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.bank-receipt-section {
+  padding: 1.5rem var(--site-mobile-px);
+  background: var(--background);
+}
+
+.bank-panel-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.bank-field {
+  margin-bottom: 1rem;
+}
+
+.bank-field-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+}
+
+.bank-input-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.bank-input-group--overlay-target {
+  position: relative;
+  overflow: visible;
+}
+
+.bank-input-group--memo {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.bank-input-group--memo.guide-highlight-target {
+  overflow: visible;
+}
+
+.bank-input-group--memo .bank-input {
+  padding-bottom: 0.375rem;
+}
+
+.bank-input-group--memo .bank-input::placeholder {
+  color: color-mix(in oklch, var(--muted-foreground) 50%, transparent);
+  font-size: 0.8125rem;
+}
+
+.bank-input-meta {
+  padding: 0.25rem 0.75rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  text-align: right;
+  border-top: 1px solid var(--border);
+}
+
+.bank-guide-text-highlight-target {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: transparent;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bank-input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  outline: none;
+}
+
+.bank-input-addon {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.bank-input.is-typing {
+  caret-color: var(--primary);
+}
+
+.bank-preset-row {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.375rem;
+  justify-content: flex-end;
+}
+
+.bank-preset-btn {
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  font-size: 0.75rem;
+  cursor: default;
+}
+
+.bank-preset-btn.is-pulse {
+  animation: guide-ring-pulse 0.8s ease;
+  border-color: var(--primary);
+}
+
+.bank-info-box {
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: rgba(243, 243, 243, 0.6);
+  font-size: 0.8125rem;
+}
+
+.guide-cb-root .bank-info-box.guide-highlight-target {
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+}
+
+.guide-cb-root [data-guide-id="charge-panel"] .bank-info-box {
+  margin-top: 1.5rem;
+}
+
+.guide-cb-root [data-guide-id="charge-panel"] .bank-btn-row {
+  margin-top: 1.5rem;
+}
+
+.bank-info-box dt {
+  font-weight: 600;
+  display: inline;
+}
+
+.bank-info-box dd {
+  display: inline;
+  margin: 0;
+}
+
+.bank-info-box-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.bank-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.bank-info-table th {
+  width: 1%;
+  padding: 0.25rem 0.5rem 0.25rem 0;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.bank-info-table td {
+  padding: 0.25rem 0;
+  vertical-align: top;
+}
+
+.bank-info-box-note {
+  margin: 0.25rem 0 0;
+}
+
+.bank-alert {
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.bank-alert--success {
+  border: 1px solid rgba(9, 105, 218, 0.5);
+  background: rgba(9, 105, 218, 0.1);
+  color: var(--primary);
+}
+
+.bank-btn-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.bank-btn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: default;
+}
+
+.bank-btn--outline {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--foreground);
+}
+
+.bank-btn--primary {
+  border: none;
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.bank-list-section {
+  padding: 0 var(--site-mobile-px) 1.5rem;
+}
+
+.bank-list-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+}
+
+.bank-tx-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.bank-tx-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9375rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.bank-tx-item:last-child {
+  border-bottom: none;
+}
+
+.bank-avatar--sm {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.6875rem;
+}
+
+.bank-tx-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.bank-tx-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.bank-tx-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.bank-tx-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.bank-tx-name {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bank-tx-type-badge {
+  flex-shrink: 0;
+  padding: 0 0.375rem;
+  height: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1rem;
+}
+
+.bank-tx-date {
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.bank-tx-amount-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.bank-tx-amount {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bank-tx-amount.is-sent {
+  color: var(--success);
+}
+
+.bank-tx-amount.is-received {
+  color: var(--primary);
+}
+
+.bank-tx-balance {
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+.bank-tx-memo {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.05rem;
+  white-space: pre-wrap;
+}
+
+.bank-deposit-info {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--muted-soft);
+  font-size: 0.8125rem;
+}
+
+.bank-deposit-info .bank-info-box-title {
+  margin-bottom: 0.5rem;
+}
+
+.bank-deposit-info .bank-info-table th {
+  color: var(--muted-foreground);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.bank-deposit-info .bank-info-table td {
+  font-weight: 600;
+}
+
+.bank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.bank-table th,
+.bank-table td {
+  padding: 0.5rem 0.375rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.bank-table th {
+  color: var(--muted-foreground);
+  font-weight: 600;
+}
+
+.bank-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.bank-badge--pending {
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.1);
+  color: #92400e;
+}
+
+.bank-badge--done {
+  background: rgba(34, 197, 94, 0.1);
+  color: #15803d;
+}
+
+.bank-badge--expired {
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+}
+
+.bank-transfer-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  background: var(--secondary-emphasis);
+}
+
+.bank-transfer-tab {
+  flex: 1;
+  padding: 0.375rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.bank-transfer-tab.is-active {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.bank-search-box {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.bank-search-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  font-size: 0.875rem;
+}
+
+.bank-user-list {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  overflow: hidden;
+}
+
+.bank-user-list:has(.guide-highlight-target) {
+  overflow: visible;
+}
+
+.bank-guide-user-name-target {
+  display: inline-block;
+}
+
+.bank-user-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+
+.bank-user-row:last-child {
+  border-bottom: none;
+}
+
+.bank-user-row.is-selected {
+  background: rgba(9, 105, 218, 0.08);
+}
+
+.bank-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  padding: 1rem;
+}
+
+.bank-dialog {
+  width: 100%;
+  max-width: 280px;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+[data-guide-id="transfer-confirm-dialog"],
+[data-guide-id="ping-confirm-dialog"] {
+  max-width: 360px;
+}
+
+.bank-dialog-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.bank-dialog-desc {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.bank-dialog-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.bank-result-box {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.bank-result-box p {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.bank-transfer-receipt {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  text-align: left;
+}
+
+.bank-transfer-receipt-status {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.bank-transfer-receipt-print-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.bank-transfer-receipt-print {
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.bank-transfer-receipt-dl {
+  margin: 0;
+}
+
+.bank-transfer-receipt-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.bank-transfer-receipt-row + .bank-transfer-receipt-row {
+  margin-top: 0.5rem;
+}
+
+.bank-transfer-receipt-row dt {
+  flex-shrink: 0;
+  width: 4.25rem;
+  line-height: 1.75;
+  color: var(--muted-foreground);
+}
+
+.bank-transfer-receipt-row dd {
+  margin: 0;
+  min-width: 0;
+  font-weight: 500;
+}
+
+.bank-transfer-receipt-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.bank-transfer-receipt-hash {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.bank-transfer-receipt-hash--inline {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.bank-transfer-receipt-hash--inline .bank-transfer-receipt-fingerprint {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.bank-transfer-receipt-fingerprint {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.375rem;
+}
+
+.bank-transfer-receipt-hash-value {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  color: var(--muted-foreground);
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 0.125rem;
+}
+
+.bank-transfer-receipt-hash-line {
+  margin: 0;
+}
+
+.bank-transfer-receipt-hash-line + .bank-transfer-receipt-hash-line {
+  margin-top: 0.125rem;
+}
+
+/* CB/TB icon animations (from build-vite index.css) */
+button[data-accordion-open="true"] .el-transfer-plane-group {
+  animation: transferWingFlutter 0.8s ease-in-out infinite;
+}
+.el-transfer-plane-group {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes transferWingFlutter {
+  0%,
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+  50% {
+    transform: scaleX(0.8) scaleY(1.1);
+  }
+}
+
+button[data-accordion-open="true"] .el-charge-icon {
+  animation: guideSpin 2s linear infinite;
+}
+@keyframes guideSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button[data-accordion-open="true"] .el-transfer-time-hand {
+  animation: transferTimeHandRotate 3s linear infinite;
+}
+.el-transfer-time-hand {
+  transform-origin: 12px 14px;
+}
+@keyframes transferTimeHandRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-confetti-layer {
+    display: none;
+  }
+
+  .guide-highlight-target,
+  .guide-click-pulse,
+  .guide-cursor,
+  button[data-accordion-open="true"] .el-charge-icon,
+  button[data-accordion-open="true"] .el-transfer-plane-group,
+  button[data-accordion-open="true"] .el-transfer-time-hand {
+    animation: none;
+  }
+}

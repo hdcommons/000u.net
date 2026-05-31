@@ -1,9 +1,31 @@
 import type { Metadata } from "next";
+import { siteMetadata } from "@/data/siteMetadata";
+import { AppConfig } from "@/utils/AppConfig";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "공공공유",
-  description: "함께 쓰고 함께 나누는 커뮤니티 앱",
+  metadataBase: new URL(AppConfig.url),
+  title: siteMetadata.title,
+  description: siteMetadata.description,
+  keywords: [...siteMetadata.keywords],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: siteMetadata.ogTitle,
+    description: siteMetadata.ogDescription,
+    url: AppConfig.url,
+    siteName: AppConfig.name,
+    locale: "ko_KR",
+    type: "website",
+    images: [siteMetadata.ogImage],
+  },
+  twitter: {
+    card: "summary",
+    title: siteMetadata.ogTitle,
+    description: siteMetadata.ogDescription,
+    images: [siteMetadata.ogImage.url],
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased selection:bg-primary/15 selection:text-foreground">{children}</body>
     </html>
   );
 }

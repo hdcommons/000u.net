@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[173],{3173:(e,a,t)=>{t.d(a,{ShapeManager:()=>p});let r=new Map;class p{addShapeGenerator(e,a){this.getShapeGenerator(e)||r.set(e,a)}getShapeGenerator(e){return r.get(e)}getSupportedShapeGenerators(){return r.keys()}}}}]);
