@@ -18,6 +18,7 @@ export function GuidePlayer<T extends Record<string, unknown>>({
   initialState,
   steps,
   renderMock,
+  sidebarFooter,
 }: {
   title: string;
   subtitle?: string;
@@ -27,6 +28,10 @@ export function GuidePlayer<T extends Record<string, unknown>>({
   initialState: T;
   steps: GuideStep<T>[];
   renderMock: (state: T) => React.ReactNode;
+  sidebarFooter?: (ctx: {
+    stepIndex: number;
+    totalSteps: number;
+  }) => React.ReactNode;
 }) {
   const mockRef = useRef<HTMLDivElement>(null);
   const timeline = useGuideTimeline({ initialState, steps, autoPlay: true });
@@ -79,6 +84,10 @@ export function GuidePlayer<T extends Record<string, unknown>>({
             onPrev={timeline.prev}
             onNext={timeline.next}
           />
+          {sidebarFooter?.({
+            stepIndex: timeline.stepIndex,
+            totalSteps: timeline.steps.length,
+          })}
         </aside>
       </div>
     </div>

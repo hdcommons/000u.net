@@ -56,6 +56,19 @@ export default function GuideCommunityBankPage() {
       initialState={config.initialState}
       steps={config.steps}
       renderMock={(state) => <CommunityBankMock state={state} />}
+      sidebarFooter={({ stepIndex, totalSteps }) =>
+        scenario === "charge" && stepIndex === totalSteps - 1 ? (
+          <div className="guide-continue">
+            <button
+              type="button"
+              className="guide-continue-btn"
+              onClick={() => setScenario("transfer")}
+            >
+              개별 송금 가이드 보기 →
+            </button>
+          </div>
+        ) : null
+      }
     />
   );
 }

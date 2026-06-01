@@ -710,9 +710,7 @@ export function PresentationDeck() {
                 >
                   {op.code}
                 </span>
-                <h3 className="presentation-feature-title mt-4">{op.title}</h3>
-                <p className="presentation-url text-sm">{op.subtitle}</p>
-                <p className="presentation-feature-desc presentation-bulk-desc mt-3">
+                <p className="presentation-feature-desc presentation-bulk-desc mt-4">
                   {op.description}
                 </p>
                 <ul className="presentation-tag-row mt-5">

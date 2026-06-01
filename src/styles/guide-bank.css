@@ -314,6 +314,35 @@
   color: #fff;
 }
 
+.guide-continue {
+  padding: 0 0.25rem;
+}
+
+.guide-continue-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background: oklch(0.564 0.198 255.45);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.guide-continue-btn:hover {
+  opacity: 0.92;
+}
+
+.guide-continue-btn:focus-visible {
+  outline: 2px solid oklch(0.564 0.198 255.45);
+  outline-offset: 2px;
+}
+
 /* ── Overlay ── */
 
 .guide-overlay {

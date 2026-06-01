@@ -44,7 +44,7 @@ export const programIntro = {
 export const webIntro = {
   label: "공공공유 웹",
   title: "웹 커뮤니티 플랫폼",
-  body: "게시·일정·공유·예약·알림까지 필요한 업무를 브라우저에서 편리하게 진행할 수 있습니다. 별도 설치 없이 접속만으로 참여와 관리를 시작할 수 있습니다.",
+  body: "게시·일정·공유·예약·알림까지 브라우저에서 편리하게 이용할 수 있습니다. 별도 설치 없이 접속만으로 참여와 관리를 시작할 수 있습니다.",
   highlights: [
     "지역화폐·시간선물·DM 일괄 대량 발송과 수신자 명단 관리",
     "푸시·문자·앱 알림 등 상황에 맞는 알림 채널 지원",
@@ -59,105 +59,98 @@ export const appIntro = {
   subtitle: "iOS · Android · 위치 기반 맞춤 서비스",
   body: "일정 확인, 공유 예약, 지역화폐·시간선물 이용, 주변 장소 탐색을 스마트폰에서 편리하게 이어갈 수 있습니다.",
   highlights: [
-    "홈·소식·공유·지도·설정 — 하단 탭 기반의 직관적인 화면 구성",
+    "핵심 화면 하단 탭 — 소식·공유·지도 등 주요 기능을 짧은 동선으로 연결",
     "위치 기반 추천 — 주변 단체·장소·콘텐츠를 거리순으로 제공",
     "대상 맞춤 알림 — 송금, 예약, DM, 멘션 알림을 휴대폰으로 전달",
-    "실시간 데이터 동기화 — 웹과 동일한 정보를 앱에서 즉시 확인",
   ],
 } as const;
 
 export const featuresIntro = {
-  label: "핵심 기능",
-  title: "커뮤니티 운영 기능",
+  label: "Platform",
+  title: "플랫폼 운영 기능",
   subtitle:
-    "정보 공유부터 화폐·시간·알림까지, 웹과 앱에서 동일하게 제공되는 통합 서비스",
+    "도메인 모듈이 통합 API·공통 인증·일관된 데이터 모델 위에서 웹과 앱에 동일하게 노출되도록 설계된 기능 계층",
 } as const;
 
 export const webFeatures = [
   {
-    title: "소식",
+    title: "Auth",
     description:
-      "게시 기반으로 정보를 공유합니다. 일정&달력으로 이벤트를 관리하고, @·@@ 멘션으로 회원·장소를 연결하고 관련 알림을 자동 전달합니다.",
-    accent: brandColors.red,
-  },
-  {
-    title: "공유·예약",
-    description:
-      "정보·공간·물품·활력을 등록·예약하고, 신청·승인·알림까지 한 흐름으로 관리합니다.",
+      "로그인·세션 관리, 회원 유형별 권한, 단일 휴대폰 다중 계정 전환을 API 게이트웨이에서 일관 검증합니다.",
     accent: brandColors.yellow,
   },
   {
-    title: "지역화폐",
+    title: "Content",
     description:
-      "충전·개별 송금·명단 기반 일괄 지급과 거래내역 조회를 통합 제공합니다.",
-    accent: brandColors.green,
+      "콘텐츠 타입·커스텀 필드로 도메인 모델을 정의하고, 리치 텍스트·미디어·일정 메타를 통합 API로 노출합니다. 웹과 앱이 동일 데이터·본문 표시 규칙을 공유합니다.",
+    accent: brandColors.red,
   },
   {
-    title: "시간선물",
+    title: "Events",
     description:
-      "공동체의 시간을 기록·선물하는 크레딧입니다. 사회적 회계를 위한 명단 기반 일괄 송금을 제공합니다.",
-    accent: brandColors.blue,
+      "멘션·예약·송금 등 도메인 이벤트를 알림·SMS·푸시 채널로 라우팅합니다. 구독 정책·읽음 상태를 웹·앱에서 동일하게 동기화합니다.",
+    accent: brandColors.teal,
   },
   {
-    title: "일정·지도",
+    title: "Geo",
     description:
-      "행사·모임 일정을 달력으로 운영하고, 등록 장소를 지도에서 탐색·연결합니다.",
+      "장소·좌표·거리 정렬을 공통 Geo 레이어로 제공합니다. 목록·지도·검색이 같은 장소 데이터를 공유해 웹·앱에서 동일한 위치 정보를 보여 줍니다.",
     accent: brandColors.purple,
   },
   {
-    title: "알림·메시지",
+    title: "GraphQL",
     description:
-      "푸시·SMS·인앱 알림과 1:1·일괄 메시지로 참여·거래·예약 소식을 상황에 맞게 전달합니다.",
-    accent: brandColors.teal,
+      "단일 스키마에서 조회·변경 요청을 제공하고, 웹·앱 클라이언트가 동일 계약으로 데이터를 주고받습니다.",
+    accent: brandColors.green,
+  },
+  {
+    title: "Ledger",
+    description:
+      "송금·지급·잔액 변경을 원장 모듈로 분리하고, 멱등 트랜잭션·감사 로그·정합성 검증으로 대량·개별 처리를 모두 수용합니다.",
+    accent: brandColors.blue,
   },
 ] as const;
 
 export const appHighlights = appIntro.highlights;
 
-/** 6페이지 — 명단 기반 일괄 전송 */
+/** 6페이지 — 명단 기반 일괄 전송 (개발·아키텍처) */
 export const bulkIntro = {
   label: "일괄 전송",
   title: "명단 기반 대량 처리",
   subtitle:
-    "수신자 명단을 구성·저장하고, 지역화폐·시간선물·메시지를 한 번에 발송합니다",
-  flowSteps: ["대상 회원 검색", "수신자 명단 구성", "일괄 발송 실행"],
-  recipientSectionTitle: "명단 관리",
+    "수신자 명단을 발송 유형과 분리한 공통 리소스로 두고, 검증·배치 실행·결과 추적 파이프라인으로 대량 트랜잭션을 처리합니다",
+  flowSteps: ["수신자 해석", "사전 검증", "배치 커밋"],
+  recipientSectionTitle: "명단 관리 아키텍처",
 } as const;
 
 export const bulkOperations = [
   {
-    code: "지역화폐",
-    title: "지역화폐",
-    subtitle: "지역화폐 일괄 지급",
+    code: "Recipient",
     description:
-      "물품 구입·서비스 제공 대상에게 지역화폐를 명단 기반 일괄 지급합니다.",
+      "회원 검색·필터 결과를 저장 가능한 수신자 명단으로 정규화합니다. 동일 명단을 반복 발송·재실행에 재사용하고, 역할별 편집·조회 권한을 분리합니다.",
     accent: brandColors.green,
-    points: ["개별·일괄 송금", "명단 연동·재사용", "해시체인"],
+    points: ["명단 스냅샷", "회원 ID 해석", "통합 API CRUD"],
   },
   {
-    code: "시간선물",
-    title: "시간선물",
-    subtitle: "시간 크레딧 일괄 지급",
+    code: "Batch",
     description:
-      "봉사 활동, 프로그램 참여 보상 등에 활용합니다. 명단 기반 일괄 송금을 제공합니다.",
+      "명단 단위 작업을 큐에 등록하고 청크 단위로 커밋합니다. 부분 실패 시 성공 건은 유지하고, 실패 건만 재시도할 수 있도록 멱등 키와 상태 머신을 적용합니다.",
     accent: brandColors.blue,
-    points: ["개별·일괄 선물", "명단 연동·재사용", "사회적 회계"],
+    points: ["청크 처리", "멱등 실행", "비동기 워커"],
   },
   {
-    code: "메시지",
-    title: "메시지",
-    subtitle: "공지·안내 일괄 발송",
+    code: "Audit",
     description:
-      "행사 소식, 안내, 운영 공지 등을 대상 회원에게 전달합니다. 회원 간 1:1 대화를 나눌 수 있습니다.",
+      "수신자별 실행 결과·오류 사유를 기록하고 알림·감사 로그와 연동합니다. 웹·앱에서 동일한 트랜잭션 ID와 진행 상태를 조회할 수 있습니다.",
     accent: brandColors.red,
-    points: ["명단 기반 일괄 발송", "읽음·알림 연동", "1:1 대화"],
+    points: ["건당 상태", "실패 격리", "알림 훅"],
   },
 ] as const;
 
 export const recipientGroupBenefits = [
-  "통합 수신자 명단 — 지역화폐·시간선물·메시지 발송에 공통 활용",
-  "회원 검색·추가 — 반복 대상을 빠르게 선정하고 명단을 유지·관리",
-  "발송 전 검증 — 명단 기반으로 대량 처리의 오류·누락을 최소화",
+  "도메인 독립 명단 — 발송 모듈과 분리된 공통 수신자 리소스",
+  "발송 전 dry-run — 잔액·권한·중복 수신자 사전 검증",
+  "운영 가시성 — 진행률·실패 원인·재실행을 관리 UI에서 확인",
 ] as const;
 
 export const notificationChannels = [
