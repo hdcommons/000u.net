@@ -1,0 +1,1732 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>제1회 주민포럼 '홍동공유로 꿈꾸는 마을' — 000u</title>
+    <style>
+      :root {
+        --brand-red: #df6767;
+        --brand-yellow: #fed867;
+        --brand-green: #6ba750;
+        --brand-blue: #6e9dea;
+        --foreground: #1f2328;
+        --muted: #59636e;
+        --slide-max: 72rem;
+        --glass-bg: rgba(255, 255, 255, 0.78);
+        --glass-border: rgba(255, 255, 255, 0.85);
+        --glass-shadow:
+          0 1px 2px rgba(31, 35, 40, 0.04), 0 12px 40px rgba(31, 35, 40, 0.07);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        font-family:
+          "Pretendard Variable",
+          Pretendard,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          "Noto Sans KR",
+          sans-serif;
+        color: var(--foreground);
+        background: #fafbfc;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .presentation-root {
+        position: relative;
+        height: 100dvh;
+        overflow: hidden;
+      }
+
+      .presentation-scroll {
+        height: 100dvh;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+      }
+
+      .presentation-scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .presentation-progress {
+        position: fixed;
+        inset: 0 auto auto 0;
+        z-index: 60;
+        width: 100%;
+        height: 3px;
+        transform-origin: left;
+        transform: scaleX(0.5);
+        background: linear-gradient(
+          90deg,
+          var(--brand-red),
+          var(--brand-yellow),
+          var(--brand-green),
+          var(--brand-blue)
+        );
+        box-shadow: 0 0 20px rgba(110, 157, 234, 0.35);
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        pointer-events: none;
+      }
+
+      .presentation-counter {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.25rem;
+        z-index: 55;
+        display: flex;
+        align-items: baseline;
+        gap: 0.15rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 4px 24px rgba(31, 35, 40, 0.08);
+        font-variant-numeric: tabular-nums;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .presentation-counter-sep,
+      .presentation-counter-total {
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .presentation-nav {
+        position: fixed;
+        right: 1rem;
+        top: 50%;
+        z-index: 55;
+        display: none;
+        transform: translateY(-50%);
+      }
+
+      @media (min-width: 640px) {
+        .presentation-nav {
+          display: block;
+        }
+      }
+
+      .presentation-nav-dock {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.65rem;
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px rgba(31, 35, 40, 0.1);
+      }
+
+      .presentation-nav-dock button {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        padding: 0.4rem 0.55rem;
+        border: none;
+        border-radius: 999px;
+        background: transparent;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .presentation-nav-dock button:hover {
+        background: rgba(31, 35, 40, 0.05);
+      }
+
+      .presentation-nav-dock button.is-active {
+        background: rgba(9, 105, 218, 0.1);
+      }
+
+      .presentation-nav-dot {
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 999px;
+        background: rgba(89, 99, 110, 0.35);
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .presentation-nav-dock button.is-active .presentation-nav-dot {
+        transform: scale(1.35);
+        background: var(--brand-blue);
+        box-shadow: 0 0 0 3px rgba(110, 157, 234, 0.2);
+      }
+
+      .presentation-nav-label {
+        display: none;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      @media (min-width: 1024px) {
+        .presentation-nav-label {
+          display: block;
+        }
+        .presentation-nav-dock button.is-active .presentation-nav-label {
+          color: var(--brand-blue);
+        }
+      }
+
+      .presentation-slide {
+        position: relative;
+        display: flex;
+        min-height: 100dvh;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5rem 1.5rem 4rem;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+
+      @media (min-width: 640px) {
+        .presentation-slide {
+          padding-inline: 2.5rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .presentation-slide {
+          padding-inline: 4rem;
+        }
+      }
+
+      .presentation-slide-inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: var(--slide-max);
+        margin-inline: auto;
+      }
+
+      .presentation-slide-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .presentation-grain {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.35;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        mix-blend-mode: overlay;
+      }
+
+      .presentation-slide--hero .presentation-slide-bg {
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 20% 10%,
+            rgba(223, 103, 103, 0.12),
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 70% 55% at 85% 20%,
+            rgba(254, 216, 103, 0.1),
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse 65% 50% at 10% 90%,
+            rgba(107, 167, 80, 0.08),
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse 60% 45% at 90% 85%,
+            rgba(110, 157, 234, 0.1),
+            transparent 50%
+          ),
+          linear-gradient(180deg, #f4f7fb 0%, #ffffff 50%, #f8f9fb 100%);
+      }
+
+      .presentation-slide--soft-mint .presentation-slide-bg {
+        background:
+          radial-gradient(
+            ellipse 70% 50% at 80% 10%,
+            rgba(107, 167, 80, 0.1),
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 10% 80%,
+            rgba(110, 157, 234, 0.08),
+            transparent 50%
+          ),
+          linear-gradient(180deg, #f6fbf8 0%, #ffffff 100%);
+      }
+
+      .presentation-slide--soft-cool .presentation-slide-bg {
+        background:
+          radial-gradient(
+            ellipse 75% 50% at 15% 20%,
+            rgba(110, 157, 234, 0.1),
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 65% 45% at 90% 85%,
+            rgba(107, 167, 80, 0.07),
+            transparent 50%
+          ),
+          linear-gradient(180deg, #f7faff 0%, #ffffff 100%);
+      }
+
+      .presentation-slide--soft-warm .presentation-slide-bg {
+        background:
+          radial-gradient(
+            ellipse 80% 55% at 85% 15%,
+            rgba(254, 216, 103, 0.12),
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 60% 45% at 5% 90%,
+            rgba(110, 157, 234, 0.08),
+            transparent 50%
+          ),
+          linear-gradient(180deg, #fcfaf7 0%, #ffffff 100%);
+      }
+
+      .presentation-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .presentation-orb-red {
+        width: 280px;
+        height: 280px;
+        top: -5%;
+        left: -3%;
+        background: rgba(223, 103, 103, 0.18);
+        animation: float 14s ease-in-out infinite;
+      }
+
+      .presentation-orb-yellow {
+        width: 220px;
+        height: 220px;
+        top: 15%;
+        right: -2%;
+        background: rgba(254, 216, 103, 0.2);
+        animation: float 16s ease-in-out infinite reverse;
+      }
+
+      .presentation-orb-green {
+        width: 240px;
+        height: 240px;
+        bottom: 5%;
+        left: 8%;
+        background: rgba(107, 167, 80, 0.15);
+        animation: float 18s ease-in-out infinite;
+      }
+
+      .presentation-orb-blue {
+        width: 200px;
+        height: 200px;
+        bottom: 10%;
+        right: 10%;
+        background: rgba(110, 157, 234, 0.18);
+        animation: float 15s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(12px, -18px) scale(1.04);
+        }
+        66% {
+          transform: translate(-8px, 10px) scale(0.97);
+        }
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 1.75rem;
+        min-height: min(72vh, 42rem);
+      }
+
+      .hero-title {
+        font-size: clamp(1.75rem, 5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.35;
+        background: linear-gradient(135deg, var(--foreground) 0%, #3d444d 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-cover {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-inline: auto;
+      }
+
+      .hero-cover img {
+        display: block;
+        width: auto;
+        max-width: min(100%, 42rem);
+        max-height: min(68vh, 36rem);
+        height: auto;
+        object-fit: contain;
+        border-radius: 1rem;
+        box-shadow: var(--glass-shadow);
+      }
+
+      .slide-label {
+        display: inline-block;
+        margin-bottom: 1rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(107, 167, 80, 0.1);
+        border: 1px solid rgba(107, 167, 80, 0.2);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--brand-green);
+      }
+
+      .slide-title {
+        font-size: clamp(1.75rem, 5vw, 2.75rem);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 1.25;
+        margin-bottom: 1.75rem;
+      }
+
+      .slide-body {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        font-weight: 600;
+        line-height: 1.6;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .slide-speaker {
+        font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        color: var(--muted);
+      }
+
+      .slide-label--blue {
+        background: rgba(110, 157, 234, 0.1);
+        border-color: rgba(110, 157, 234, 0.2);
+        color: var(--brand-blue);
+      }
+
+      .scroll-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding: 0.75rem 1.25rem;
+        border: none;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        box-shadow: var(--glass-shadow);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--brand-blue);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .scroll-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(110, 157, 234, 0.2);
+      }
+
+      .scroll-hint {
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg) translateY(-2px);
+        animation: bounce 1.8s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: rotate(45deg) translateY(-2px);
+        }
+        50% {
+          transform: rotate(45deg) translateY(2px);
+        }
+      }
+
+      .agenda {
+        display: grid;
+        gap: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .agenda {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 1.15rem;
+        }
+      }
+
+      .agenda-section {
+        padding: 1.35rem 1.5rem;
+        border-radius: 1.15rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .agenda-section__title {
+        margin-bottom: 1rem;
+        font-size: clamp(1.25rem, 3vw, 1.625rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-transform: none;
+        color: var(--brand-green);
+      }
+
+      .agenda-section--panel .agenda-section__title {
+        color: var(--brand-blue);
+      }
+
+      .agenda-section--workshop .agenda-section__title {
+        color: #9a6bb8;
+      }
+
+      .agenda-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .agenda-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .agenda-item__topic {
+        font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+        font-weight: 700;
+        line-height: 1.5;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .agenda-item__meta {
+        font-size: clamp(1rem, 2.2vw, 1.125rem);
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      .outline-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: outline;
+      }
+
+      .outline-list__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1.1rem 1.35rem;
+        border-radius: 1.15rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+        font-weight: 600;
+        line-height: 1.55;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .outline-list__item::before {
+        flex-shrink: 0;
+        counter-increment: outline;
+        content: counter(outline);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 999px;
+        background: rgba(107, 167, 80, 0.12);
+        border: 1px solid rgba(107, 167, 80, 0.22);
+        font-size: 0.875rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--brand-green);
+      }
+
+      .timeline-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline-list__item {
+        padding: 0.9rem 1.15rem;
+        border-radius: 1rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+        font-weight: 600;
+        line-height: 1.55;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .slide-title--compact {
+        margin-bottom: 1.25rem;
+      }
+
+      .history-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem 1.15rem;
+      }
+
+      .history-gallery__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .history-gallery__year {
+        font-size: clamp(0.9375rem, 2vw, 1.125rem);
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        color: var(--brand-green);
+      }
+
+      .history-gallery__figure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0;
+        padding: 0.5rem;
+        border-radius: 0.85rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .history-gallery__figure img {
+        display: block;
+        width: 100%;
+        max-height: 10.5rem;
+        height: auto;
+        object-fit: contain;
+        border-radius: 0.35rem;
+      }
+
+      .slide-lead {
+        margin: -0.75rem 0 1rem;
+        font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+        font-weight: 700;
+        line-height: 1.5;
+        letter-spacing: -0.015em;
+        color: var(--brand-green);
+      }
+
+      .leaf-points {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .leaf-points__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
+        padding: 0.55rem 0.85rem;
+        border-radius: 0.85rem;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        font-size: clamp(0.875rem, 1.85vw, 1rem);
+        font-weight: 600;
+        line-height: 1.55;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .leaf-points__item::before {
+        flex-shrink: 0;
+        content: "–";
+        font-weight: 800;
+        color: var(--brand-green);
+      }
+
+      .concern-list {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      @media (min-width: 900px) {
+        .concern-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0.75rem 1rem;
+        }
+      }
+
+      .concern-block {
+        padding: 0.85rem 1rem;
+        border-radius: 1rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .concern-block__question {
+        margin-bottom: 0.5rem;
+        font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+        font-weight: 800;
+        line-height: 1.5;
+        letter-spacing: -0.015em;
+        color: var(--brand-blue);
+      }
+
+      .concern-block__answers {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin: 0;
+        padding: 0 0 0 0.85rem;
+        list-style: none;
+      }
+
+      .concern-block__answers li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.45rem;
+        font-size: clamp(0.8125rem, 1.75vw, 0.9375rem);
+        font-weight: 600;
+        line-height: 1.55;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .concern-block__answers li::before {
+        flex-shrink: 0;
+        content: "·";
+        font-weight: 800;
+        color: var(--muted);
+      }
+
+      .stat-board {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+
+      .stat-board__date {
+        margin-bottom: 0.35rem;
+        font-size: clamp(1rem, 2.2vw, 1.125rem);
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        color: var(--muted);
+      }
+
+      .stat-board__row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.9rem 1.15rem;
+        border-radius: 1rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .stat-board__label {
+        font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: -0.015em;
+        color: var(--foreground);
+      }
+
+      .stat-board__value {
+        font-size: clamp(1rem, 2.2vw, 1.125rem);
+        font-weight: 800;
+        line-height: 1.5;
+        letter-spacing: -0.015em;
+        font-variant-numeric: tabular-nums;
+        color: var(--brand-green);
+        white-space: nowrap;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(1.25rem);
+        animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+
+      .delay-4 {
+        animation-delay: 0.45s;
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="presentation-root">
+      <div class="presentation-progress" id="progress" aria-hidden="true"></div>
+
+      <div class="presentation-counter" aria-live="polite">
+        <span id="counter-current">01</span>
+        <span class="presentation-counter-sep">/</span>
+        <span class="presentation-counter-total" id="counter-total">17</span>
+      </div>
+
+      <nav class="presentation-nav" aria-label="슬라이드 탐색">
+        <div class="presentation-nav-dock" id="nav-dock"></div>
+      </nav>
+
+      <div class="presentation-scroll" id="scroll-container">
+        <!-- Slide 1: Title -->
+        <section
+          class="presentation-slide presentation-slide--hero"
+          data-slide
+          data-label="표지"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div
+            class="presentation-orb presentation-orb-red"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="presentation-orb presentation-orb-yellow"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="presentation-orb presentation-orb-green"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="presentation-orb presentation-orb-blue"
+            aria-hidden="true"
+          ></div>
+          <div class="presentation-slide-inner">
+            <div class="hero-content">
+              <h1 class="hero-title fade-up">
+                제1회 주민포럼 '홍동공유로 꿈꾸는 마을'
+              </h1>
+              <figure class="hero-cover fade-up delay-1">
+                <img
+                  src="./images/vjr01T4wPCFTQUj4Hzkx6.webp"
+                  alt="제1회 주민포럼 '홍동공유로 꿈꾸는 마을'"
+                  width="672"
+                  height="960"
+                />
+              </figure>
+              <button
+                type="button"
+                class="scroll-cta fade-up delay-2"
+                data-goto="1"
+              >
+                <span>다음</span>
+                <span class="scroll-hint" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2: 프로그램 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="프로그램"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">Program</span>
+            <h2 class="slide-title fade-up delay-1">프로그램</h2>
+            <div class="agenda fade-up delay-2">
+              <section class="agenda-section">
+                <h3 class="agenda-section__title">발제</h3>
+                <ul class="agenda-list">
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic"
+                      >홍동공유로 꿈꾸는 마을</span
+                    >
+                    <span class="agenda-item__meta"
+                      >김지음 (마을활력소 사무국장)</span
+                    >
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic"
+                      >마을플랫폼 000U의 특징</span
+                    >
+                    <span class="agenda-item__meta"
+                      >홍웅기 (마을활력소 IT본부장)</span
+                    >
+                  </li>
+                </ul>
+              </section>
+              <section class="agenda-section agenda-section--panel">
+                <h3 class="agenda-section__title">토론자</h3>
+                <ul class="agenda-list">
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">둠벙</span>
+                    <span class="agenda-item__meta"
+                      >햇살배움터사회적협동조합</span
+                    >
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">야호</span>
+                    <span class="agenda-item__meta">함께먹는식구들</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">이창신</span>
+                    <span class="agenda-item__meta"
+                      >홍성군마을만들기지원센터</span
+                    >
+                  </li>
+                </ul>
+              </section>
+              <section class="agenda-section agenda-section--workshop">
+                <h3 class="agenda-section__title">앱 활용 워크샵</h3>
+                <ul class="agenda-list">
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">회원가입</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">잎페이</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">커먼즈</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">핑퐁</span>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 3: 발제 — 김지음 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="발제 1"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">발제</span>
+            <h2 class="slide-title fade-up delay-1">홍동공유로 꿈꾸는 마을</h2>
+            <p class="slide-speaker fade-up delay-2">
+              김지음 (마을활력소 사무국장)
+            </p>
+          </div>
+        </section>
+
+        <!-- Slide 4: 순서 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="순서"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">Outline</span>
+            <h2 class="slide-title fade-up delay-1">순서</h2>
+            <ol class="outline-list">
+              <li class="outline-list__item fade-up delay-2">
+                홍동공유가 걸어온 길
+              </li>
+              <li class="outline-list__item fade-up delay-2">
+                온라인 지역화폐 ‘잎페이’
+              </li>
+              <li class="outline-list__item fade-up delay-3">
+                시간을 선물하는 마을 ‘핑퐁’
+              </li>
+              <li class="outline-list__item fade-up delay-3">
+                마을의 자원을 공유하는 ‘커먼즈’
+              </li>
+              <li class="outline-list__item fade-up delay-4">
+                홍동공유가 꿈꾸는 마을
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Slide 5: 경과 소개 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="경과 소개"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">History</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              경과 소개
+            </h2>
+            <ul class="timeline-list">
+              <li class="timeline-list__item fade-up delay-2">
+                2024년 05월 충남 공유경제활성화지원사업 선정
+              </li>
+              <li class="timeline-list__item fade-up delay-2">
+                2024년 07월 &lt;공유플랫폼 사업설명회&gt;
+              </li>
+              <li class="timeline-list__item fade-up delay-2">
+                2024년 09월~11월 공유플랫폼 기획강좌 4회 진행
+              </li>
+              <li class="timeline-list__item fade-up delay-3">
+                2024년 12월 12일 시연회 및 설명회
+              </li>
+              <li class="timeline-list__item fade-up delay-3">
+                2025년 09월 앱스토어, 플레이스토어 등록
+              </li>
+              <li class="timeline-list__item fade-up delay-3">
+                2026년 01월 홈페이지 버전 개발
+              </li>
+              <li class="timeline-list__item fade-up delay-4">
+                2026년 06월 01일 정식 오픈
+              </li>
+              <li class="timeline-list__item fade-up delay-4">
+                2026년 07월 03일 주민포럼 “홍동공유로 꿈꾸는 마을”
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 6: 지역화폐 잎이 걸어온 길 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="잎"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">잎</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              지역화폐 잎이 걸어온 길
+            </h2>
+            <div class="history-gallery fade-up delay-2">
+              <div class="history-gallery__item">
+                <span class="history-gallery__year">2011</span>
+                <figure class="history-gallery__figure">
+                  <img
+                    src="./images/ip-2011.png"
+                    alt="2011년 지역화폐 잎"
+                    width="320"
+                    height="240"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              <div class="history-gallery__item">
+                <span class="history-gallery__year">2012</span>
+                <figure class="history-gallery__figure">
+                  <img
+                    src="./images/ip-2012.png"
+                    alt="2012년 지역화폐 잎"
+                    width="320"
+                    height="240"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              <div class="history-gallery__item">
+                <span class="history-gallery__year">2014</span>
+                <figure class="history-gallery__figure">
+                  <img
+                    src="./images/ip-2014.png"
+                    alt="2014년 지역화폐 잎"
+                    width="320"
+                    height="240"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              <div class="history-gallery__item">
+                <span class="history-gallery__year">2017</span>
+                <figure class="history-gallery__figure">
+                  <img
+                    src="./images/ip-2017.png"
+                    alt="2017년 지역화폐 잎"
+                    width="320"
+                    height="240"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              <div class="history-gallery__item">
+                <span class="history-gallery__year">2018</span>
+                <figure class="history-gallery__figure">
+                  <img
+                    src="./images/ip-2018.png"
+                    alt="2018년 지역화폐 잎"
+                    width="320"
+                    height="240"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              <div class="history-gallery__item">
+                <span class="history-gallery__year">2026</span>
+                <figure class="history-gallery__figure">
+                  <img
+                    src="./images/ip-2026.png"
+                    alt="2026년 지역화폐 잎"
+                    width="320"
+                    height="240"
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 7: 지역화폐 잎이 꿈꾸는 마을 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="잎 · 꿈"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              지역화폐 잎이 꿈꾸는 마을
+            </h2>
+            <p class="slide-lead fade-up delay-2">홍성지역화폐거래소잎</p>
+            <ul class="leaf-points">
+              <li class="leaf-points__item fade-up delay-2">
+                ‘잎은’ 홍성에서 사용하는 지역화폐입니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-2">
+                지역화폐를 사용하여 지역에서 창출된 부가 지역 내에서 순환할 수
+                있도록 합니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-2">
+                지역에서 생산된 농산물과 노동력 등을 지역에서 나누어 지역경제를
+                활성화합니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                유통과정에서 배출되는 대기오염과 포장하여 발생하는 쓰레기를
+                줄입니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                지역 내에서 이웃과 소통하며 사용하지 않는 물건을 나누어 재활용을
+                실천합니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                제대로 평가받지 못한 숨은 재능을 주고받으며 삶을 풍족하게
+                합니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-4">
+                물건과 마음을 주고받으며 더욱 따뜻한 마을을 만듭니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-4">
+                지역화폐로 기본소득을 지급할 수 있도록 노력합니다.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 8: 지역화폐 잎이 꿈꾸는 마을 — 효과 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="잎 · 효과"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">잎</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              지역화폐 잎이 꿈꾸는 마을
+            </h2>
+            <div class="agenda fade-up delay-2">
+              <section class="agenda-section">
+                <h3 class="agenda-section__title">판매자에게 좋은 점</h3>
+                <ul class="agenda-list">
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">단골이 늘어납니다.</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic"
+                      >돈이 지역에서 다시 돌아옵니다.</span
+                    >
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic"
+                      >카드수수료 대신에 관계가 남습니다.</span
+                    >
+                  </li>
+                </ul>
+              </section>
+              <section class="agenda-section agenda-section--panel">
+                <h3 class="agenda-section__title">잎이 많아질 수록</h3>
+                <ul class="agenda-list">
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">지역 먹거리 강화</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">지역 돌봄경제 확대</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">지역 매출 상승</span>
+                  </li>
+                </ul>
+              </section>
+              <section class="agenda-section agenda-section--workshop">
+                <h3 class="agenda-section__title">지역공동기금 조성</h3>
+                <ul class="agenda-list">
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic"
+                      >홍동의 경제 자립성 : 작은 경제권을 형성</span
+                    >
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 9: 잎페이가 더해지면 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="잎페이"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎페이</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              잎페이가 더해지면
+            </h2>
+            <ul class="leaf-points">
+              <li class="leaf-points__item fade-up delay-2">
+                지역화폐 잎 사용량이 늘어납니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-2">
+                지역화폐 잎을 온라인으로도 거래할 수 있게 됩니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-2">
+                신협을 가지 않아도 환전이 쉬워집니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                1잎 단위 거래가 가능해서 거스름돈이나 팁 거래도 자유롭습니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                환전 선물(3%) 지급이 가능해서 환전과 사용을 촉진할 수 있습니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                역환전 수수료는 지역화폐 잎의 운영에 도움이 됩니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-4">
+                거래 내역 확인이 편해집니다.
+              </li>
+              <li class="leaf-points__item fade-up delay-4">
+                지역화폐 잎 사용 통계 확인이 가능해집니다.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 10: 잎페이에 대한 우려 1 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="우려 1"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎페이</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              잎페이에 대한 우려 1
+            </h2>
+            <div class="concern-list fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">지폐 잎이 없어지나?</h3>
+                <ul class="concern-block__answers">
+                  <li>지폐 잎은 앞으로도 계속 발행되고 활용됩니다.</li>
+                  <li>지폐 잎을 사용할 수 없을 때 잎페이를 사용하면 됩니다.</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  지폐 잎 거래가 줄어들까?
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    스마트폰과 신용카드로 인해서 잎화 뿐 아니라 원화도 거래량이
+                    급격히 감소하는 추세
+                  </li>
+                  <li>
+                    지폐 잎의 장점은 여전하고 사용 용도가 다르기도 합니다.
+                  </li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">스마트폰이 없는 사람은?</h3>
+                <ul class="concern-block__answers">
+                  <li>지폐 잎을 그대로 사용하시면 됩니다.</li>
+                  <li>PC에서 홈페이지로 접속해서 거래하실 수 있습니다.</li>
+                  <li>
+                    활력소 전화 (010-5521-5262)로 문자 보내주시면 대신 전달할 수
+                    있습니다.
+                  </li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  잎페이 보안이나 해킹의 위험성은?
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    잎페이는 블록체인과 유사한 보안 검증체계를 갖고 있습니다.
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 11: 잎페이에 대한 우려 2 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="우려 2"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎페이</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              잎페이에 대한 우려 2
+            </h2>
+            <div class="concern-list fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">대면 접촉이 줄어들까?</h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    물건과 서비스를 주고받으려면 어차피 우리는 만나야 합니다.
+                  </li>
+                  <li>
+                    온라인 거래로 인해서 더 많이 만날 기회가 만들어지면
+                    좋겠습니다.
+                  </li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  잎페이 충전 선물은 누가 감당하나?
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>우선은 마을활력소가 3%의 충전선물을 제공합니다.</li>
+                  <li>역환전할 때 3%~5%의 수수료를 제할 수 있습니다.</li>
+                  <li>(가맹점의 경우에는 1년간 역환전 수수료가 없습니다.)</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">잎페이 서비스가 종료되면?</h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    잎페이 서비스가 종료되기 전에 미리 공지하고, 잔액은
+                    역환전해드립니다.
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 12: 잎페이 현황 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="잎페이 현황"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎페이</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              잎페이 현황
+            </h2>
+            <div class="stat-board fade-up delay-2">
+              <p class="stat-board__date">2026년 6월 30일 현재</p>
+              <div class="stat-board__row">
+                <span class="stat-board__label">충전한 사람 수</span>
+                <span class="stat-board__value">22명</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">충전한 횟수</span>
+                <span class="stat-board__value">35회</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">충전한 금액</span>
+                <span class="stat-board__value">1,854,000 잎</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">사용한 횟수</span>
+                <span class="stat-board__value">37회</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">사용한 금액</span>
+                <span class="stat-board__value">2,632,511 잎</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 13: 잎페이가 활성화되면 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="잎페이 활성화"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎페이</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              잎페이가 활성화되면
+            </h2>
+            <div class="concern-list fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">마을 가게에 도움이 됩니다.</h3>
+                <ul class="concern-block__answers">
+                  <li>가맹점이 되면 단골이 늘어납니다.</li>
+                  <li>
+                    가맹점과 생산자들의 현금 매출이 더 많이 늘어나게 됩니다.
+                  </li>
+                  <li>카드 수수료 등이 줄어듭니다.</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  마을 주민들에게 도움이 됩니다.
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    충전을 할 때마다 3%의 충전선물이 있으므로, 3%의 할인
+                    효과가 있습니다.
+                  </li>
+                  <li>주민들끼리의 모든 돈 거래가 편해집니다.</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">잎거래소에게 도움이 됩니다.</h3>
+                <ul class="concern-block__answers">
+                  <li>실무자와 환전소 업무 감소</li>
+                  <li>잎 환전량, 거래량 등의 통계 자료를 얻을 수 있습니다.</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">마을 커먼즈가 늘어납니다.</h3>
+                <ul class="concern-block__answers">
+                  <li>환전이 늘어날 수록 마을공동기금이 늘어납니다.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 14: 시간을 선물하는 마을 핑퐁 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="핑퐁"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">PingPong</span>
+            <h2 class="slide-title fade-up delay-1">
+              시간을 선물하는 마을 핑퐁
+            </h2>
+          </div>
+        </section>
+
+        <!-- Slide 15: 핑퐁 현황 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="핑퐁 현황"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">PingPong</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              핑퐁 현황
+            </h2>
+            <div class="stat-board fade-up delay-2">
+              <p class="stat-board__date">2026년 6월 30일 현재</p>
+              <div class="stat-board__row">
+                <span class="stat-board__label">핑 보낸 사람</span>
+                <span class="stat-board__value">9명</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">퐁 받은 사람</span>
+                <span class="stat-board__value">94명</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">핑퐁 횟수</span>
+                <span class="stat-board__value">105회</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">핑퐁</span>
+                <span class="stat-board__value">3100핑퐁 = 51.66 시간</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 16: 워크숍 미션 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="워크숍 미션"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">Workshop</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              워크숍 미션
+            </h2>
+            <ol class="outline-list">
+              <li class="outline-list__item fade-up delay-2">
+                홍동공유 회원가입을 성공한다!
+              </li>
+              <li class="outline-list__item fade-up delay-2">
+                오른쪽에 앉은 사람에게 잎페이로 100잎을 송금한다!
+              </li>
+              <li class="outline-list__item fade-up delay-3">
+                왼쪽에 앉은 사람에게 10핑을 선물한다!
+              </li>
+              <li class="outline-list__item fade-up delay-4">
+                홍동공유에 자기가 공유할 수 있는 장소, 물품, 활력을
+                등록한다.
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Slide 17: 아이디어 / 질의응답 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="Q&A"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">Ideas</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              아이디어 / 질의응답
+            </h2>
+            <ul class="leaf-points">
+              <li class="leaf-points__item fade-up delay-2">게시판 분류 기능 …</li>
+              <li class="leaf-points__item fade-up delay-2">달력 색깔</li>
+              <li class="leaf-points__item fade-up delay-2">
+                핑퐁 선물 하루에 넣을 시간 제한 9시간 * 60분
+              </li>
+              <li class="leaf-points__item fade-up delay-3">공지사항 추가 예정</li>
+              <li class="leaf-points__item fade-up delay-3">
+                텍스트 위주의 게시판
+              </li>
+              <li class="leaf-points__item fade-up delay-3">
+                공간 예약 승인 기능…
+              </li>
+              <li class="leaf-points__item fade-up delay-4">잎 정기이체 기능</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const slides = Array.from(document.querySelectorAll("[data-slide]"));
+        const total = slides.length;
+        const container = document.getElementById("scroll-container");
+        const progress = document.getElementById("progress");
+        const counterCurrent = document.getElementById("counter-current");
+        const counterTotal = document.getElementById("counter-total");
+        const navDock = document.getElementById("nav-dock");
+
+        counterTotal.textContent = String(total).padStart(2, "0");
+
+        slides.forEach((slide, i) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.setAttribute(
+            "aria-label",
+            (slide.dataset.label || `슬라이드 ${i + 1}`) + "로 이동",
+          );
+          btn.innerHTML =
+            '<span class="presentation-nav-dot"></span>' +
+            '<span class="presentation-nav-label">' +
+            (slide.dataset.label || String(i + 1)) +
+            "</span>";
+          btn.addEventListener("click", () => scrollTo(i));
+          navDock.appendChild(btn);
+        });
+
+        const navButtons = navDock.querySelectorAll("button");
+        let activeIndex = 0;
+
+        function scrollTo(index) {
+          slides[index]?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function updateUI(index) {
+          activeIndex = index;
+          const pct = ((index + 1) / total) * 100;
+          progress.style.transform = "scaleX(" + pct / 100 + ")";
+          counterCurrent.textContent = String(index + 1).padStart(2, "0");
+          navButtons.forEach((btn, i) => {
+            btn.classList.toggle("is-active", i === index);
+            btn.setAttribute("aria-current", i === index ? "true" : undefined);
+          });
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const idx = slides.indexOf(entry.target);
+                if (idx >= 0) updateUI(idx);
+              }
+            });
+          },
+          { root: container, threshold: 0.55 },
+        );
+
+        slides.forEach((el) => observer.observe(el));
+
+        document.querySelectorAll("[data-goto]").forEach((el) => {
+          el.addEventListener("click", () => scrollTo(Number(el.dataset.goto)));
+        });
+
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowDown" || e.key === "PageDown") {
+            e.preventDefault();
+            scrollTo(Math.min(activeIndex + 1, total - 1));
+          } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+            e.preventDefault();
+            scrollTo(Math.max(activeIndex - 1, 0));
+          }
+        });
+
+        updateUI(0);
+      })();
+    </script>
+  </body>
+</html>

@@ -480,10 +480,25 @@ export function PresentationDeck() {
             <p className="presentation-fade-up presentation-delay-3 presentation-hero-meta">
               커뮤니티 플랫폼 · 웹 &amp; 모바일 앱
             </p>
+            <div className="presentation-fade-up presentation-delay-4 presentation-hero-forum">
+              <p className="presentation-hero-forum-title">
+                26년 7월 3일 제1회 주민포럼
+              </p>
+              <div className="presentation-hero-forum-links">
+                <Link href="/forum-dv/" className="presentation-hero-forum-link">
+                  홍동공유로 꿈꾸는 마을
+                  <LinkOutIcon className="presentation-hero-forum-link-icon" />
+                </Link>
+                <Link href="/featured/" className="presentation-hero-forum-link">
+                  공공공유 특징
+                  <LinkOutIcon className="presentation-hero-forum-link-icon" />
+                </Link>
+              </div>
+            </div>
             <button
               type="button"
               onClick={() => scrollToSlide(1)}
-              className="presentation-fade-up presentation-delay-4 presentation-scroll-cta"
+              className="presentation-fade-up presentation-delay-5 presentation-scroll-cta"
             >
               <span>Explore</span>
               <span className="presentation-scroll-hint" aria-hidden />
