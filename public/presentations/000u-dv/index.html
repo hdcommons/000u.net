@@ -789,6 +789,30 @@
         color: var(--muted);
       }
 
+      .concern-block--wide {
+        grid-column: 1 / -1;
+      }
+
+      @media (min-width: 900px) {
+        .concern-list:has(.concern-block--wide) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .concern-block + .leaf-points {
+        margin-top: 0.85rem;
+      }
+
+      .commons-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+
+      .concern-block__question--solo {
+        margin-bottom: 0;
+      }
+
       .stat-board {
         display: flex;
         flex-direction: column;
@@ -873,7 +897,7 @@
       <div class="presentation-counter" aria-live="polite">
         <span id="counter-current">01</span>
         <span class="presentation-counter-sep">/</span>
-        <span class="presentation-counter-total" id="counter-total">17</span>
+        <span class="presentation-counter-total" id="counter-total">19</span>
       </div>
 
       <nav class="presentation-nav" aria-label="슬라이드 탐색">
@@ -1099,7 +1123,7 @@
         <section
           class="presentation-slide presentation-slide--soft-mint"
           data-slide
-          data-label="잎"
+          data-label="잎 걸어온 길"
         >
           <div class="presentation-slide-bg" aria-hidden="true"></div>
           <div class="presentation-grain" aria-hidden="true"></div>
@@ -1185,59 +1209,11 @@
           </div>
         </section>
 
-        <!-- Slide 7: 지역화폐 잎이 꿈꾸는 마을 -->
-        <section
-          class="presentation-slide presentation-slide--soft-cool"
-          data-slide
-          data-label="잎 · 꿈"
-        >
-          <div class="presentation-slide-bg" aria-hidden="true"></div>
-          <div class="presentation-grain" aria-hidden="true"></div>
-          <div class="presentation-slide-inner">
-            <span class="slide-label slide-label--blue fade-up">잎</span>
-            <h2 class="slide-title slide-title--compact fade-up delay-1">
-              지역화폐 잎이 꿈꾸는 마을
-            </h2>
-            <p class="slide-lead fade-up delay-2">홍성지역화폐거래소잎</p>
-            <ul class="leaf-points">
-              <li class="leaf-points__item fade-up delay-2">
-                ‘잎은’ 홍성에서 사용하는 지역화폐입니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-2">
-                지역화폐를 사용하여 지역에서 창출된 부가 지역 내에서 순환할 수
-                있도록 합니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-2">
-                지역에서 생산된 농산물과 노동력 등을 지역에서 나누어 지역경제를
-                활성화합니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-3">
-                유통과정에서 배출되는 대기오염과 포장하여 발생하는 쓰레기를
-                줄입니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-3">
-                지역 내에서 이웃과 소통하며 사용하지 않는 물건을 나누어 재활용을
-                실천합니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-3">
-                제대로 평가받지 못한 숨은 재능을 주고받으며 삶을 풍족하게
-                합니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-4">
-                물건과 마음을 주고받으며 더욱 따뜻한 마을을 만듭니다.
-              </li>
-              <li class="leaf-points__item fade-up delay-4">
-                지역화폐로 기본소득을 지급할 수 있도록 노력합니다.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Slide 8: 지역화폐 잎이 꿈꾸는 마을 — 효과 -->
+        <!-- Slide 7: 지역화폐 잎이 꿈꾸는 마을 — 효과 -->
         <section
           class="presentation-slide presentation-slide--soft-mint"
           data-slide
-          data-label="잎 · 효과"
+          data-label="잎"
         >
           <div class="presentation-slide-bg" aria-hidden="true"></div>
           <div class="presentation-grain" aria-hidden="true"></div>
@@ -1276,6 +1252,9 @@
                   </li>
                   <li class="agenda-item">
                     <span class="agenda-item__topic">지역 매출 상승</span>
+                  </li>
+                  <li class="agenda-item">
+                    <span class="agenda-item__topic">지역공동기금 조성</span>
                   </li>
                 </ul>
               </section>
@@ -1444,46 +1423,7 @@
           </div>
         </section>
 
-        <!-- Slide 12: 잎페이 현황 -->
-        <section
-          class="presentation-slide presentation-slide--soft-mint"
-          data-slide
-          data-label="잎페이 현황"
-        >
-          <div class="presentation-slide-bg" aria-hidden="true"></div>
-          <div class="presentation-grain" aria-hidden="true"></div>
-          <div class="presentation-slide-inner">
-            <span class="slide-label slide-label--blue fade-up">잎페이</span>
-            <h2 class="slide-title slide-title--compact fade-up delay-1">
-              잎페이 현황
-            </h2>
-            <div class="stat-board fade-up delay-2">
-              <p class="stat-board__date">2026년 6월 30일 현재</p>
-              <div class="stat-board__row">
-                <span class="stat-board__label">충전한 사람 수</span>
-                <span class="stat-board__value">22명</span>
-              </div>
-              <div class="stat-board__row">
-                <span class="stat-board__label">충전한 횟수</span>
-                <span class="stat-board__value">35회</span>
-              </div>
-              <div class="stat-board__row">
-                <span class="stat-board__label">충전한 금액</span>
-                <span class="stat-board__value">1,854,000 잎</span>
-              </div>
-              <div class="stat-board__row">
-                <span class="stat-board__label">사용한 횟수</span>
-                <span class="stat-board__value">37회</span>
-              </div>
-              <div class="stat-board__row">
-                <span class="stat-board__label">사용한 금액</span>
-                <span class="stat-board__value">2,632,511 잎</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Slide 13: 잎페이가 활성화되면 -->
+        <!-- Slide 11: 잎페이가 활성화되면 -->
         <section
           class="presentation-slide presentation-slide--soft-cool"
           data-slide
@@ -1536,7 +1476,46 @@
           </div>
         </section>
 
-        <!-- Slide 14: 시간을 선물하는 마을 핑퐁 -->
+        <!-- Slide 12: 잎페이 현황 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="잎페이 현황"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label slide-label--blue fade-up">잎페이</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              잎페이 현황
+            </h2>
+            <div class="stat-board fade-up delay-2">
+              <p class="stat-board__date">2026년 6월 30일 현재</p>
+              <div class="stat-board__row">
+                <span class="stat-board__label">충전한 사람 수</span>
+                <span class="stat-board__value">22명</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">충전한 횟수</span>
+                <span class="stat-board__value">35회</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">충전한 금액</span>
+                <span class="stat-board__value">1,854,000 잎</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">사용한 횟수</span>
+                <span class="stat-board__value">37회</span>
+              </div>
+              <div class="stat-board__row">
+                <span class="stat-board__label">사용한 금액</span>
+                <span class="stat-board__value">2,632,511 잎</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 13: 시간을 선물하는 마을 핑퐁 -->
         <section
           class="presentation-slide presentation-slide--soft-mint"
           data-slide
@@ -1546,15 +1525,107 @@
           <div class="presentation-grain" aria-hidden="true"></div>
           <div class="presentation-slide-inner">
             <span class="slide-label fade-up">PingPong</span>
-            <h2 class="slide-title fade-up delay-1">
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
               시간을 선물하는 마을 핑퐁
             </h2>
+            <div class="concern-list fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  돈으로 주고 받을 수 없는 고마움은 어떻게 표현할 수 있나?
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    원도 잎도 없을 때, 누구나 갖고 있는 시간을 선물하는 핑퐁
+                  </li>
+                  <li>모든 사람의 시간은 같은 가치를 갖는다.</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  돈으로 거래되지 않는 활동, 관계, 시간은 어떻게 기억되나?
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>마을이나 마을단체를 위해 하는 자원활동의 기록</li>
+                  <li>
+                    공익적인 단체가 마을 주민들을 위해 하는 무상의 서비스
+                  </li>
+                  <li>부족한 활동비를 받고 일하는 마을의 활동가들</li>
+                </ul>
+              </section>
+              <section class="concern-block concern-block--wide">
+                <h3 class="concern-block__question">
+                  선물하는 시간은 핑, 선물받은 시간은 퐁
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    핑 : 타인의 시간을 알아보고, 나도 같은 시간을 선물해주겠다고
+                    인정해주는 활동
+                  </li>
+                  <li>퐁 : 내가 선물한 시간에 대한 보답</li>
+                  <li>핑+퐁 : 우리가 함께 한 시간의 합계</li>
+                  <li>퐁-핑 : 나의 시간 수지</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 14: 핑퐁이 일상이 되면 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="핑퐁 활성화"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">PingPong</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              핑퐁이 일상이 되면
+            </h2>
+            <div class="concern-list fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">내 삶의 기록</h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    돈이 기록되는 가계부가 아니라, 시간이 기록되는 나의 역사가
+                    만들어집니다.
+                  </li>
+                  <li>
+                    돈이 되지 않아서 사라졌던 삶의 시간들이 누적됩니다.
+                  </li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">단체의 기록</h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    수익을 목적으로 하지 않는 마을 단체의 활동은 무엇으로
+                    기록하고 평가할 수 있을까?
+                  </li>
+                  <li>
+                    단체가 제공하는 시간들, 주민들이 제공하는 시간들이
+                    누적됩니다.
+                  </li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">마을의 통계</h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    마을 주민들이 서로 얼마나 관계하고 있는지를 보여주는 지표가
+                    됩니다.
+                  </li>
+                  <li>핑과 퐁이 많은 주민들에게 상을 수여할 수도 있습니다.</li>
+                </ul>
+              </section>
+            </div>
           </div>
         </section>
 
         <!-- Slide 15: 핑퐁 현황 -->
         <section
-          class="presentation-slide presentation-slide--soft-cool"
+          class="presentation-slide presentation-slide--soft-mint"
           data-slide
           data-label="핑퐁 현황"
         >
@@ -1587,9 +1658,110 @@
           </div>
         </section>
 
-        <!-- Slide 16: 워크숍 미션 -->
+        <!-- Slide 16: 홍동커먼즈 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="커먼즈"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">Commons</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              홍동커먼즈
+            </h2>
+            <div class="commons-stack fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">
+                  커먼즈(commons) : 우리가 공유하는 모든 것.
+                </h3>
+                <ul class="concern-block__answers">
+                  <li>
+                    공유지, 공유물품, 공유자원, 공동활동, 공동규칙, 공동체,
+                    사양교환 등
+                  </li>
+                  <li>내 것이지만 다른 사람들에게 빌려줄 수 있는 것</li>
+                  <li>자유롭게 빌려 쓸 수 있지만 내 것처럼 아껴야 할 것.</li>
+                  <li>커머너(commoner) : 공유하는 사람, 공유자.</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  다른 사람에게 빌려줄 수 있는 커먼즈를 등록하세요.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  온라인으로 예약하면 알림이 전달됩니다.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  개인이나 단체가 운영하는 자원을 관리하세요.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  수익을 목적으로 하지 않는 한에서 비용(잎, 핑퐁)을 책정할 수
+                  있어요.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  단체 회원이나 특정 사람들로만 사용을 제한할 수도 있어요.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  홍동공유로 예약하고 잎과 핑퐁으로 결제까지!
+                </p>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 17: 홍동커먼즈가 활성화되면 -->
         <section
           class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="커먼즈 활성화"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">Commons</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              홍동커먼즈가 활성화되면
+            </h2>
+            <div class="commons-stack fade-up delay-2">
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  우리 마을에 어떤 커먼즈가 있는지 찾아볼 수 있습니다.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  커먼즈에 대한 설명과 사용법 등을 확인할 수 있습니다.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  우리가 공유하는 커먼즈가 늘어납니다.
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  숨어 있는 커먼즈가 더 잘 활용되도록 할 수 있습니다.
+                </p>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 18: 워크숍 미션 -->
+        <section
+          class="presentation-slide presentation-slide--soft-cool"
           data-slide
           data-label="워크숍 미션"
         >
@@ -1618,7 +1790,7 @@
           </div>
         </section>
 
-        <!-- Slide 17: 아이디어 / 질의응답 -->
+        <!-- Slide 19: 아이디어 / 질의응답 -->
         <section
           class="presentation-slide presentation-slide--soft-cool"
           data-slide
