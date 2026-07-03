@@ -741,6 +741,10 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 0.75rem 1rem;
         }
+
+        .concern-list--single {
+          grid-template-columns: 1fr;
+        }
       }
 
       .concern-block {
@@ -860,6 +864,14 @@
         white-space: nowrap;
       }
 
+      .network-graph-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.4;
+      }
+
       .fade-up {
         opacity: 0;
         transform: translateY(1.25rem);
@@ -897,7 +909,7 @@
       <div class="presentation-counter" aria-live="polite">
         <span id="counter-current">01</span>
         <span class="presentation-counter-sep">/</span>
-        <span class="presentation-counter-total" id="counter-total">19</span>
+        <span class="presentation-counter-total" id="counter-total">21</span>
       </div>
 
       <nav class="presentation-nav" aria-label="슬라이드 탐색">
@@ -1119,7 +1131,51 @@
           </div>
         </section>
 
-        <!-- Slide 6: 지역화폐 잎이 걸어온 길 -->
+        <!-- Slide 6: 우리마을 공유플랫폼 홍동공유 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
+          data-slide
+          data-label="공유플랫폼"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">Platform</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              우리마을 공유플랫폼 홍동공유
+            </h2>
+            <div class="concern-list concern-list--single fade-up delay-2">
+              <section class="concern-block">
+                <h3 class="concern-block__question">마을 주민들의 플랫폼</h3>
+                <ul class="concern-block__answers">
+                  <li>주민이 만들고</li>
+                  <li>주민이 소유하고,</li>
+                  <li>주민이 사용하는 플랫폼</li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">커먼즈 플랫폼</h3>
+                <ul class="concern-block__answers">
+                  <li>지역화폐, 자원공유, 시간선물, 정보공유 등</li>
+                  <li>
+                    커먼즈 생활을 하는 커머너들을 위한 종합 플랫폼
+                  </li>
+                </ul>
+              </section>
+              <section class="concern-block">
+                <h3 class="concern-block__question">비영리 플랫폼</h3>
+                <ul class="concern-block__answers">
+                  <li>홍동공유를 통해서 수익사업을 할 계획이 없음.</li>
+                  <li>
+                    다른 지역에도 공공공유를 확산시키면서 운영비 확보할 희망.
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 7: 지역화폐 잎이 걸어온 길 -->
         <section
           class="presentation-slide presentation-slide--soft-mint"
           data-slide
@@ -1310,6 +1366,10 @@
               <li class="leaf-points__item fade-up delay-4">
                 지역화폐 잎 사용 통계 확인이 가능해집니다.
               </li>
+              <li class="leaf-points__item fade-up delay-4">
+                지역화폐 잎 담당자와 가맹점 담당자의 환전/역환전 업무가
+                편해집니다.
+              </li>
             </ul>
           </div>
         </section>
@@ -1414,7 +1474,7 @@
                 <h3 class="concern-block__question">잎페이 서비스가 종료되면?</h3>
                 <ul class="concern-block__answers">
                   <li>
-                    잎페이 서비스가 종료되기 전에 미리 공지하고, 잔액은
+                    만약에 종료된다면 사전에 미리 공지하고, 잔액은
                     역환전해드립니다.
                   </li>
                 </ul>
@@ -1481,8 +1541,11 @@
           class="presentation-slide presentation-slide--soft-mint"
           data-slide
           data-label="잎페이 현황"
+          data-network-graph
         >
-          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-slide-bg" aria-hidden="true">
+            <canvas class="network-graph-canvas" aria-hidden="true"></canvas>
+          </div>
           <div class="presentation-grain" aria-hidden="true"></div>
           <div class="presentation-slide-inner">
             <span class="slide-label slide-label--blue fade-up">잎페이</span>
@@ -1628,8 +1691,11 @@
           class="presentation-slide presentation-slide--soft-mint"
           data-slide
           data-label="핑퐁 현황"
+          data-network-graph
         >
-          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-slide-bg" aria-hidden="true">
+            <canvas class="network-graph-canvas" aria-hidden="true"></canvas>
+          </div>
           <div class="presentation-grain" aria-hidden="true"></div>
           <div class="presentation-slide-inner">
             <span class="slide-label fade-up">PingPong</span>
@@ -1678,8 +1744,8 @@
                 </h3>
                 <ul class="concern-block__answers">
                   <li>
-                    공유지, 공유물품, 공유자원, 공동활동, 공동규칙, 공동체,
-                    사양교환 등
+                    공유지, 공유물품, 공유자원, 공유화폐, 공동활동, 공동규칙,
+                    공동체, 사양교환 등
                   </li>
                   <li>내 것이지만 다른 사람들에게 빌려줄 수 있는 것</li>
                   <li>자유롭게 빌려 쓸 수 있지만 내 것처럼 아껴야 할 것.</li>
@@ -1759,9 +1825,52 @@
           </div>
         </section>
 
-        <!-- Slide 18: 워크숍 미션 -->
+        <!-- Slide 18: 홍동공유로 꿈꾸는 마을 -->
         <section
           class="presentation-slide presentation-slide--soft-cool"
+          data-slide
+          data-label="꿈꾸는 마을"
+        >
+          <div class="presentation-slide-bg" aria-hidden="true"></div>
+          <div class="presentation-grain" aria-hidden="true"></div>
+          <div class="presentation-slide-inner">
+            <span class="slide-label fade-up">Vision</span>
+            <h2 class="slide-title slide-title--compact fade-up delay-1">
+              홍동공유로 꿈꾸는 마을
+            </h2>
+            <div class="commons-stack fade-up delay-2">
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  더 순환하고, 더 연결되고, 더 공유하는 마을
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  지역화폐가 더 활성화되고
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  지역가게와 지역생산자가 더 풍요로워지고
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  지역단체가 더 활력이 생기고
+                </p>
+              </section>
+              <section class="concern-block">
+                <p class="concern-block__question concern-block__question--solo">
+                  지역주민들의 소중한 삶의 시간이 더 잘 기록되고 기억되는 마을
+                </p>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 19: 워크숍 미션 -->
+        <section
+          class="presentation-slide presentation-slide--soft-mint"
           data-slide
           data-label="워크숍 미션"
         >
@@ -1779,18 +1888,24 @@
               <li class="outline-list__item fade-up delay-2">
                 오른쪽에 앉은 사람에게 잎페이로 100잎을 송금한다!
               </li>
-              <li class="outline-list__item fade-up delay-3">
+              <li class="outline-list__item fade-up delay-2">
                 왼쪽에 앉은 사람에게 10핑을 선물한다!
               </li>
+              <li class="outline-list__item fade-up delay-3">
+                홍동공유에 자기가 공유할 수 있는 커먼즈(장소/물품/활력)를
+                등록한다!
+              </li>
+              <li class="outline-list__item fade-up delay-3">
+                오른쪽에 앉은 사람의 활력을 예약한다!
+              </li>
               <li class="outline-list__item fade-up delay-4">
-                홍동공유에 자기가 공유할 수 있는 장소, 물품, 활력을
-                등록한다.
+                오늘의 자리를 준비한 마을활력에게 핑을 선물한다!
               </li>
             </ol>
           </div>
         </section>
 
-        <!-- Slide 19: 아이디어 / 질의응답 -->
+        <!-- Slide 20: 아이디어 / 질의응답 -->
         <section
           class="presentation-slide presentation-slide--soft-cool"
           data-slide
@@ -1803,21 +1918,6 @@
             <h2 class="slide-title slide-title--compact fade-up delay-1">
               아이디어 / 질의응답
             </h2>
-            <ul class="leaf-points">
-              <li class="leaf-points__item fade-up delay-2">게시판 분류 기능 …</li>
-              <li class="leaf-points__item fade-up delay-2">달력 색깔</li>
-              <li class="leaf-points__item fade-up delay-2">
-                핑퐁 선물 하루에 넣을 시간 제한 9시간 * 60분
-              </li>
-              <li class="leaf-points__item fade-up delay-3">공지사항 추가 예정</li>
-              <li class="leaf-points__item fade-up delay-3">
-                텍스트 위주의 게시판
-              </li>
-              <li class="leaf-points__item fade-up delay-3">
-                공간 예약 승인 기능…
-              </li>
-              <li class="leaf-points__item fade-up delay-4">잎 정기이체 기능</li>
-            </ul>
           </div>
         </section>
       </div>
@@ -1898,6 +1998,382 @@
         });
 
         updateUI(0);
+      })();
+
+      (function initNetworkGraphs() {
+        const NODE_COLORS = [
+          "#5ba89a",
+          "#4a3d6b",
+          "#c98a9a",
+          "#d4604a",
+          "#7eb0d4",
+          "#a8b0b8",
+          "#d4b86a",
+          "#6ba750",
+          "#8fa89e",
+          "#b8c4cc",
+        ];
+
+        function rand(seed) {
+          let s = seed;
+          return () => {
+            s = (s * 16807) % 2147483647;
+            return (s - 1) / 2147483646;
+          };
+        }
+
+        function initNetworkGraphSlide(slide, graphSeed) {
+          const canvas = slide.querySelector(".network-graph-canvas");
+          if (!canvas) return;
+
+          const ctx = canvas.getContext("2d");
+
+          let nodes = [];
+          let edges = [];
+          let travelers = [];
+          let w = 0;
+          let h = 0;
+          let mouseX = null;
+          let mouseY = null;
+          let visible = false;
+          let animating = false;
+          let rafId = 0;
+
+          function buildGraph() {
+            const r = rand(graphSeed);
+            nodes = [];
+            edges = [];
+
+            const cx = w * 0.5;
+            const cy = h * 0.46;
+            const unit = Math.min(w, h) * 0.11;
+
+            function place(ox, oy, radius, color, mass) {
+              nodes.push({
+                x: cx + ox * unit,
+                y: cy + oy * unit,
+                ox,
+                oy,
+                vx: 0,
+                vy: 0,
+                r: radius,
+                color,
+                mass,
+              });
+              return nodes.length - 1;
+            }
+
+            const hub = place(0.2, -0.1, 22, "#5ba89a", 4);
+
+            const secondary = [
+              { ox: -1.4, oy: 2.2, r: 17, color: "#4a3d6b", mass: 2.8 },
+              { ox: -2.8, oy: -1.6, r: 15, color: "#c98a9a", mass: 2.2 },
+              { ox: 2.6, oy: 2.4, r: 16, color: "#d4604a", mass: 2.4 },
+              { ox: 1.8, oy: -2.2, r: 13, color: "#7eb0d4", mass: 1.8 },
+              { ox: 3.2, oy: 0.2, r: 12, color: "#a8b0b8", mass: 1.5 },
+              { ox: -2.0, oy: 0.6, r: 13, color: "#d4b86a", mass: 1.6 },
+              { ox: 0.8, oy: 2.0, r: 11, color: "#8fa89e", mass: 1.3 },
+              { ox: -0.6, oy: -2.4, r: 10, color: "#6ba750", mass: 1.2 },
+            ];
+
+            const hubChildren = [];
+            secondary.forEach((spec) => {
+              const idx = place(spec.ox, spec.oy, spec.r, spec.color, spec.mass);
+              hubChildren.push(idx);
+              edges.push({ from: hub, to: idx, w: 1.1 });
+              if (r() > 0.35) {
+                edges.push({ from: idx, to: hub, w: 0.7 });
+              }
+            });
+
+            for (let i = 0; i < 28; i++) {
+              const parent =
+                r() > 0.55
+                  ? hubChildren[Math.floor(r() * hubChildren.length)]
+                  : hub;
+              const parentNode = nodes[parent];
+              const angle = r() * Math.PI * 2;
+              const dist = 0.55 + r() * 1.4;
+              const idx = place(
+                parentNode.ox + Math.cos(angle) * dist,
+                parentNode.oy + Math.sin(angle) * dist,
+                4 + r() * 7,
+                NODE_COLORS[Math.floor(r() * NODE_COLORS.length)],
+                0.8 + r() * 0.6,
+              );
+              edges.push({ from: parent, to: idx, w: 0.5 + r() * 0.6 });
+              if (r() > 0.6 && i > 3) {
+                const other =
+                  hubChildren[Math.floor(r() * hubChildren.length)] || hub;
+                if (other !== idx) {
+                  edges.push({ from: idx, to: other, w: 0.35 + r() * 0.35 });
+                }
+              }
+            }
+
+            for (const e of edges) {
+              const a = nodes[e.from];
+              const b = nodes[e.to];
+              e.len = Math.hypot(b.x - a.x, b.y - a.y);
+            }
+
+            buildTravelers();
+          }
+
+          function buildTravelers() {
+            const r = rand(graphSeed + 57);
+            travelers = [];
+            if (!edges.length) return;
+
+            const count = Math.min(14, Math.max(8, Math.floor(edges.length / 6)));
+            for (let i = 0; i < count; i++) {
+              travelers.push({
+                edge: Math.floor(r() * edges.length),
+                t: r(),
+                speed: 0.0018 + r() * 0.0028,
+                r: 2.5 + r() * 2.5,
+                color: r() > 0.45 ? "#5ba89a" : "#d4604a",
+                pulsePhase: r() * Math.PI * 2,
+                pulseSpeed: 0.06 + r() * 0.05,
+              });
+            }
+          }
+
+          function edgePoint(e, t) {
+            const a = nodes[e.from];
+            const b = nodes[e.to];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const len = Math.hypot(dx, dy) || 1;
+            const start = a.r / len;
+            const end = 1 - b.r / len;
+            const tt = start + t * (end - start);
+            return { x: a.x + dx * tt, y: a.y + dy * tt };
+          }
+
+          function updateTravelers() {
+            for (const tr of travelers) {
+              tr.t += tr.speed;
+              if (tr.t >= 1) {
+                tr.t = 0;
+              }
+              tr.pulsePhase += tr.pulseSpeed;
+            }
+          }
+
+          function simulateSteps(count) {
+            for (let step = 0; step < count; step++) {
+              for (let i = 0; i < nodes.length; i++) {
+                const n = nodes[i];
+                for (let j = i + 1; j < nodes.length; j++) {
+                  const m = nodes[j];
+                  const dx = n.x - m.x;
+                  const dy = n.y - m.y;
+                  const distSq = dx * dx + dy * dy || 1;
+                  const dist = Math.sqrt(distSq);
+                  const force = 1200 / distSq;
+                  const fx = (dx / dist) * force;
+                  const fy = (dy / dist) * force;
+                  n.vx += fx / n.mass;
+                  n.vy += fy / n.mass;
+                  m.vx -= fx / m.mass;
+                  m.vy -= fy / m.mass;
+                }
+              }
+
+              for (const e of edges) {
+                const a = nodes[e.from];
+                const b = nodes[e.to];
+                const dx = b.x - a.x;
+                const dy = b.y - a.y;
+                const dist = Math.hypot(dx, dy) || 0.001;
+                const force = (dist - e.len) * 0.028;
+                const fx = (dx / dist) * force;
+                const fy = (dy / dist) * force;
+                a.vx += fx / a.mass;
+                a.vy += fy / a.mass;
+                b.vx -= fx / b.mass;
+                b.vy -= fy / b.mass;
+              }
+
+              if (mouseX !== null && mouseY !== null) {
+                for (const n of nodes) {
+                  const dx = n.x - mouseX;
+                  const dy = n.y - mouseY;
+                  const distSq = dx * dx + dy * dy;
+                  if (distSq < 180 * 180) {
+                    const dist = Math.sqrt(distSq) || 1;
+                    const force = 420 / dist;
+                    n.vx += (dx / dist) * force;
+                    n.vy += (dy / dist) * force;
+                  }
+                }
+              }
+
+              for (const n of nodes) {
+                n.vx *= 0.82;
+                n.vy *= 0.82;
+                n.x += n.vx;
+                n.y += n.vy;
+              }
+            }
+          }
+
+          function drawArrow(x1, y1, x2, y2, lineW, alpha) {
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const len = Math.hypot(dx, dy);
+            if (len < 2) return;
+
+            const angle = Math.atan2(dy, dx);
+            const ah = Math.max(4, lineW * 3.5);
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = "rgba(110, 118, 128, " + alpha + ")";
+            ctx.lineWidth = lineW;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(
+              x2 - ah * Math.cos(angle - 0.45),
+              y2 - ah * Math.sin(angle - 0.45),
+            );
+            ctx.lineTo(
+              x2 - ah * Math.cos(angle + 0.45),
+              y2 - ah * Math.sin(angle + 0.45),
+            );
+            ctx.closePath();
+            ctx.fillStyle = "rgba(110, 118, 128, " + alpha + ")";
+            ctx.fill();
+          }
+
+          function draw() {
+            ctx.clearRect(0, 0, w, h);
+
+            for (const e of edges) {
+              const a = nodes[e.from];
+              const b = nodes[e.to];
+              const dx = b.x - a.x;
+              const dy = b.y - a.y;
+              const len = Math.hypot(dx, dy) || 1;
+              const ux = dx / len;
+              const uy = dy / len;
+              const x1 = a.x + ux * a.r;
+              const y1 = a.y + uy * a.r;
+              const x2 = b.x - ux * b.r;
+              const y2 = b.y - uy * b.r;
+              drawArrow(x1, y1, x2, y2, e.w, 0.28 + e.w * 0.08);
+            }
+
+            for (const n of nodes) {
+              ctx.beginPath();
+              ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+              ctx.fillStyle = n.color;
+              ctx.globalAlpha = 0.72;
+              ctx.fill();
+              ctx.globalAlpha = 1;
+            }
+
+            for (const tr of travelers) {
+              const e = edges[tr.edge];
+              if (!e) continue;
+              const pt = edgePoint(e, tr.t);
+              const pulse = 0.5 + 0.5 * Math.sin(tr.pulsePhase);
+              const radius = tr.r * (0.72 + pulse * 0.55);
+              const alpha = 0.38 + pulse * 0.58;
+
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, radius * 2.4, 0, Math.PI * 2);
+              ctx.fillStyle = tr.color;
+              ctx.globalAlpha = alpha * 0.22;
+              ctx.fill();
+
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
+              ctx.fillStyle = tr.color;
+              ctx.globalAlpha = alpha;
+              ctx.fill();
+              ctx.globalAlpha = 1;
+            }
+          }
+
+          function resize() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            w = rect.width;
+            h = rect.height;
+            canvas.width = Math.round(w * dpr);
+            canvas.height = Math.round(h * dpr);
+            canvas.style.width = w + "px";
+            canvas.style.height = h + "px";
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            buildGraph();
+          }
+
+          function onPointerMove(clientX, clientY) {
+            if (!visible) return;
+            const rect = canvas.getBoundingClientRect();
+            mouseX = clientX - rect.left;
+            mouseY = clientY - rect.top;
+            simulateSteps(5);
+          }
+
+          function onPointerLeave() {
+            mouseX = null;
+            mouseY = null;
+          }
+
+          function frame() {
+            if (!animating) return;
+            updateTravelers();
+            draw();
+            rafId = requestAnimationFrame(frame);
+          }
+
+          function startAnimation() {
+            if (animating) return;
+            animating = true;
+            frame();
+          }
+
+          function stopAnimation() {
+            animating = false;
+            cancelAnimationFrame(rafId);
+          }
+
+          function refresh() {
+            if (!visible) return;
+            resize();
+            draw();
+            startAnimation();
+          }
+
+          slide.addEventListener("mousemove", (e) => {
+            onPointerMove(e.clientX, e.clientY);
+          });
+          slide.addEventListener("mouseleave", onPointerLeave);
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                visible = entry.isIntersecting;
+                if (visible) refresh();
+                else stopAnimation();
+              });
+            },
+            { threshold: 0.15 },
+          );
+
+          observer.observe(slide);
+          window.addEventListener("resize", refresh);
+        }
+
+        document.querySelectorAll("[data-network-graph]").forEach((slide, i) => {
+          initNetworkGraphSlide(slide, 42 + i * 15);
+        });
       })();
     </script>
   </body>
